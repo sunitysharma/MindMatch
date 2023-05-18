@@ -199,76 +199,65 @@ function showQuestion() {
 }
 
 // Function to select an answer
+
 function selectAnswer(value) {
   console.log("selectAnswer called");
   console.log("value: ", value);
   answers.push(value);
+
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
     showQuestion();
+  } else {
+    // Disable answer buttons
+    const answerButtons = document.querySelectorAll(".answer");
+    answerButtons.forEach((button) => {
+      button.disabled = true;
+      button.classList.add("disabled");
+    });
   }
 }
 
-// Function to show the result
-// function showResult() {
-//   console.log("showResult called");
-//   console.log("answers: ", answers);
-
-//   let totalScore = 0;
-//   for (let i = 0; i < answers.length; i++) {
-//     totalScore += answers[i];
-//   }
-//   const averageScore = totalScore / answers.length;
-
-//   let resultText = "";
-//   if (averageScore >= 1 && averageScore <= 2) {
-//     resultText = `${archetypes[0].name} - ${archetypes[0].description}`;
-//   } else if (averageScore > 2 && averageScore <= 3) {
-//     resultText = `${archetypes[1].name} - ${archetypes[1].description}`;
-//   } else if (averageScore > 3 && averageScore <= 4) {
-//     resultText = `${archetypes[2].name} - ${archetypes[2].description}`;
-//   } else if (averageScore > 4 && averageScore <= 5) {
-//     resultText = `${archetypes[3].name} - ${archetypes[3].description}`;
-//   } else if (averageScore > 5 && averageScore <= 6) {
-//     resultText = `${archetypes[4].name} - ${archetypes[4].description}`;
-//   } else if (averageScore > 6 && averageScore <= 7) {
-//     resultText = `${archetypes[5].name} - ${archetypes[5].description}`;
-//   } else if (averageScore > 7 && averageScore <= 8) {
-//     resultText = `${archetypes[6].name} - ${archetypes[6].description}`;
-//   } else if (averageScore > 8 && averageScore <= 9) {
-//     resultText = `${archetypes[7].name} - ${archetypes[7].description}`;
-//   } else if (averageScore > 9 && averageScore <= 10) {
-//     resultText = `${archetypes[8].name} - ${archetypes[8].description}`;
-//   } else if (averageScore > 10 && averageScore <= 11) {
-//     resultText = `${archetypes[9].name} - ${archetypes[9].description}`;
-//   } else if (averageScore > 11 && averageScore <= 12) {
-//     resultText = `${archetypes[10].name} - ${archetypes[10].description}`;
-//   } else if (averageScore > 12 && averageScore <= 13) {
-//     resultText = `${archetypes[11].name} - ${archetypes[11].description}`;
-//   }
-//   resultElement.textContent = `You are ${resultText}`;
-//   answerElement.innerHTML = "";
-//   submitButton.style.display = "none";
-//   restartButton.style.display = "block";
-//   questionElement.innerHTML = resultElement.textContent;
-//   resultElement.style.display = "none";
-// }
-
+//Function to show the result
 function showResult() {
   console.log("showResult called");
   console.log("answers: ", answers);
-  let archetypeIndex = 0;
+
   let maxScore = 0;
-  archetypes.forEach((archetype, index) => {
-    const score = answers.reduce(
-      (acc, value) => acc + (value === index + 1 ? 1 : 0),
-      0
-    );
-    if (score > maxScore) {
-      maxScore = score;
-      archetypeIndex = index;
-    }
-  });
+
+  for (let i = 0; i < answers.length; i++) {
+    const answerValue = answers[i];
+    console.log("answerValue: ", answerValue);
+    maxScore += answerValue;
+  }
+  console.log("maxScore: ", maxScore);
+
+  let archetypeIndex = 0;
+  if (maxScore >= 10 && maxScore <= 13) {
+    archetypeIndex = 0;
+  } else if (maxScore > 13 && maxScore <= 16) {
+    archetypeIndex = 1;
+  } else if (maxScore > 16 && maxScore <= 19) {
+    archetypeIndex = 2;
+  } else if (maxScore > 19 && maxScore <= 22) {
+    archetypeIndex = 3;
+  } else if (maxScore > 22 && maxScore <= 25) {
+    archetypeIndex = 4;
+  } else if (maxScore > 25 && maxScore <= 28) {
+    archetypeIndex = 5;
+  } else if (maxScore > 28 && maxScore <= 31) {
+    archetypeIndex = 6;
+  } else if (maxScore > 31 && maxScore <= 33) {
+    archetypeIndex = 7;
+  } else if (maxScore > 33 && maxScore <= 35) {
+    archetypeIndex = 8;
+  } else if (maxScore > 35 && maxScore <= 37) {
+    archetypeIndex = 9;
+  } else if (maxScore > 37 && maxScore <= 39) {
+    archetypeIndex = 10;
+  } else if (maxScore === 40) {
+    archetypeIndex = 11;
+  }
   resultElement.textContent = `You are ${archetypes[archetypeIndex].name} - ${archetypes[archetypeIndex].description}`;
   answerElement.innerHTML = "";
   submitButton.style.display = "none";
