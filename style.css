@@ -243,6 +243,17 @@ body {
   background-color: #ffa500;
 }
 
+.answer.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Style for selected and disabled answer options */
+.answer[disabled] {
+  background-color: gray;
+  color: white;
+}
+
 /*-----------------------------------------*/
 /* Styling ---Submit and Restart Button--- */
 /*-----------------------------------------*/
